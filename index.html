@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Quote Machine</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div id="root"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/react/15.4.2/react-dom.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.21.1/babel.min.js"></script>
+<script type="text/babel">
+
+const fixpositn = {
+    position: "fixed",
+    top: "209px",
+    left: "16px",
+    color: "red"
+}
+
+class QuoteMachine extends React.Component{
+constructor(props){
+    super(props)
+
+this.state ={
+index: 0,
+quote: ["You don't have to be great to start, but you have to start to be great.", "Don't watch the clock. Do what it does. Keep going.", "There are no short cuts to any place worth going.","Arise, Awake and stop not until the goal is reached."],
+author : ["--Zig Ziglar", "--Sam Levenson", "--Beverly Sills", "--Swami Vivekananda."],
+color : ["blue", "green","violet","orange","Indigo"]
+}
+}
+handleIndex=()=>{
+    this.setState({
+    index: this.state.index +1})
+}
+
+render(){
+const {index, quote, author, color} = this.state;
+const myquote = quote[index]==undefined?<strong style={{fontSize:40}}>Thanks for viewing...</strong>: quote[index];
+const tweet = author[index] == undefined? '': 'tweet quote';
+var styles = {fontSize:"20px",border:0,outline:0,padding:"10px 20px",margin:"0",
+color:"white",backgroundColor: color[index]}
+
+return(
+<div id="quote-box" style={{textAlign:"center", margin: 0, position: "fixed"}}>
+<p style={{fontSize:"20px",border:0,outline:0,padding:"10px 20px 40px", margin:0,
+color:color[index],backgroundColor: color[index]}}></p>
+<p id="text">{myquote}</p>
+<p id="author" style={{textAlign:"right", margin: 20}}>{author[index]}</p>
+<p style={fixpositn}><a id="tweet-quote" href="twitter.com/intent/tweet">{tweet}</a></p>
+<p style={{textAlign:"right", margin: 5}}><button style={{fontSize:"16px",border:0,outline:0,padding:"10px 20px",margin:"10px",borderRadius:"5px",
+color:"white",backgroundColor: color[index]}} id="new-quote" onClick={this.handleIndex}>{quote[index] && "new quote" || '😍' }</button></p>
+<center style={styles}> by Lipan Ionut-Alexandru</center>
+</div>
+)}
+}
+  
+ReactDOM.render(<QuoteMachine />,document.getElementById("root"))
+</script>
+    </body>
+</html>
